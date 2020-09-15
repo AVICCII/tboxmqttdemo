@@ -703,7 +703,7 @@ nav.navbar a.menu-btn:hover {
 }
 
 .dashboard-counts .count-number {
-  font-size: 2.2em;
+  font-size: 1.5em;
   font-weight: 300;
 }
 
@@ -722,7 +722,7 @@ nav.navbar a.menu-btn:hover {
     font-size: 0.9em;
   }
   .dashboard-counts .count-number {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 }
 
@@ -747,8 +747,8 @@ nav.navbar a.menu-btn:hover {
 
 .dashboard-header .pie-chart {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   max-width: 100%;
   margin: 0 auto;
 }

@@ -703,7 +703,7 @@ nav.navbar a.menu-btn:hover {
 }
 
 .dashboard-counts .count-number {
-  font-size: 2.2em;
+  font-size: 1.5em;
   font-weight: 300;
 }
 
@@ -722,7 +722,7 @@ nav.navbar a.menu-btn:hover {
     font-size: 0.9em;
   }
   .dashboard-counts .count-number {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 }
 
@@ -1539,7 +1539,7 @@ button {
 
 .login-page .form-outer,
 .register-page .form-outer {
-  min-height: 100vh;
+  min-height: 200vh;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px 0;

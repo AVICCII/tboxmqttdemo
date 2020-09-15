@@ -71,13 +71,13 @@ $(document).ready(function () {
         type: 'doughnut',
         data: {
             labels: [
-                "First",
-                "Second",
-                "Third"
+                "剩余油量 ml",
+                "预计剩余里程 m",
+                "已行驶里程 m"
             ],
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: [30000, 12000, 11000],
                     borderWidth: [1, 1, 1],
                     backgroundColor: [
                         brandPrimary,
