@@ -40,30 +40,29 @@
       // 认证信息
     }
 
-    const client = mqtt.connect('ws://test.mosquitto.org:8080/mqtt', options);
-    // client.subscribe('test');
-    //
-    // client.on('message', function (topic, message) {
-    //   var p1 = message.toString();
-    //   console.log(p1);
-    //
-    //   if(topic=="test")
-    //   {
-    //     var p2 = JSON.parse(p1);
-    //     console.log(p2);
-    //     // $("#csd").html(p2.val);
-    //     // option.series[0].data[0].value = p2.val;
-    //     //
-    //     // myChart.setOption(option, true)
-    //   }
-    //   // else if(topic=="photo")
-    //   // {
-    //   //   $("#userImge").attr("src","data:image/jpg;base64,"+p1);
-    //   // }
-    //
-    //
-    //
-    // })
+    const client = mqtt.connect('ws://localhost:8083/mqtt', options);
+    client.subscribe('goods');
+
+    client.on('message', function (topic, message) {
+      var p1 = message.toString();
+      console.log(p1);
+
+      if(topic=="goods")
+      {
+        var p2 = JSON.parse(p1);
+        console.log(p2.name);
+        document.getElementById("name").innerHTML=p2.name
+        //
+        // myChart.setOption(option, true)
+      }
+      // else if(topic=="photo")
+      // {
+      //   $("#userImge").attr("src","data:image/jpg;base64,"+p1);
+      // }
+
+
+
+    })
 
     client.on('reconnect', (error) => {
       console.log('正在重连:', error)
@@ -200,7 +199,7 @@
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-user"></i></div>
                 <div class="name"><strong class="text-uppercase">车牌号</strong><span>number plate</span>
-                  <div class="name"><strong class="text-uppercase">皖A88888</strong></div>
+                  <div class="name"><strong class="text-uppercase"><span id="name"></span><br> </strong></div>
                 </div>
               </div>
             </div>
