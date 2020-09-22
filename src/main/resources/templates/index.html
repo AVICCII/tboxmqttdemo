@@ -43,6 +43,10 @@
     const client = mqtt.connect('ws://localhost:8083/mqtt', options);
     client.subscribe('goods');
 
+    function send(){
+      client.publish("goods","{ \"powerswitch\": \"on\" }")
+    }
+
     client.on('message', function (topic, message) {
       var p1 = message.toString();
       console.log(p1);
@@ -51,7 +55,10 @@
       {
         var p2 = JSON.parse(p1);
         console.log(p2.name);
-        document.getElementById("name").innerHTML=p2.name
+        if(p2.name!=null){
+          document.getElementById("name").innerHTML=p2.name
+
+        }
         //
         // myChart.setOption(option, true)
       }
@@ -63,6 +70,8 @@
 
 
     })
+
+
 
     client.on('reconnect', (error) => {
       console.log('正在重连:', error)
@@ -220,7 +229,7 @@
                       <li class="d-flex align-items-baseline">
                         <div class="form-group">
                           <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="左前门锁开" class="btn btn-primary">
+                          <input type="submit" value="左前门锁开" class="btn btn-primary" onclick="send()">
                           <input type="submit" value="左前门锁关" class="btn btn-danger">
                         </div>
                       </li>
@@ -408,12 +417,12 @@
             </div>
             <!-- Line Chart -->
             <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
-              <div class="card sales-report">
+              <div class="card-header sales-report">
                 <strong class="text-uppercase align-items-center">每月用车情况及预计剩余里程情况统计</strong>
-                <div class="line-chart">
+              </div>
+              <div class="card-body line-chart">
                   <canvas id="lineCahrt"></canvas>
                 </div>
-              </div>
             </div>
           </div>
         </div>
