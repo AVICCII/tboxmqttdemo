@@ -82,43 +82,43 @@
         <!-- Sidebar Header    -->
         <div class="sidenav-header d-flex align-items-center justify-content-center">
           <!-- User Info-->
-          <div class="sidenav-header-inner text-center"><img th:src="@{/img/avatar-1.jpg}"  class="img-fluid rounded-circle">
+          <div class="sidenav-header-inner text-center"><img th:src="@{/img/squrtle.jpg}"  class="img-fluid rounded-circle">
             <h2 class="h5" th:text="${loginUsername}"></h2><span>admin</span>
           </div>
           <!-- Small Brand information, appears on minimized sidebar-->
           <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>B</strong><strong class="text-primary">D</strong></a></div>
         </div>
         <!-- Sidebar Navigation Menus-->
-        <div class="main-menu">
-          <h5 class="sidenav-heading">Main</h5>
-          <ul id="side-main-menu" class="side-menu list-unstyled">                  
-            <li><a href="index.html"> <i class="icon-home"></i>Home                             </a></li>
-            <li><a href="forms.html"> <i class="icon-form"></i>Forms                             </a></li>
-            <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts                             </a></li>
-            <li><a href="tables.html"> <i class="icon-grid"></i>Tables                             </a></li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
-              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-              </ul>
-            </li>
-            <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page                             </a></li>
-            <li> <a href="#"> <i class="icon-mail"></i>Demo
-                <div class="badge badge-warning">6 New</div></a></li>
-          </ul>
-        </div>
-        <div class="admin-menu">
-          <h5 class="sidenav-heading">Second menu</h5>
-          <ul id="side-admin-menu" class="side-menu list-unstyled"> 
-            <li> <a href="#"> <i class="icon-screen"> </i>Demo</a></li>
-            <li> <a href="#"> <i class="icon-flask"> </i>Demo
-                <div class="badge badge-info">Special</div></a></li>
-            <li> <a href=""> <i class="icon-flask"> </i>Demo</a></li>
-            <li> <a href=""> <i class="icon-picture"> </i>Demo</a></li>
-          </ul>
-        </div>
-      </div>
+<!--        <div class="main-menu">-->
+<!--          <h5 class="sidenav-heading">Main</h5>-->
+<!--          <ul id="side-main-menu" class="side-menu list-unstyled">                  -->
+<!--            <li><a href="index.html"> <i class="icon-home"></i>Home                             </a></li>-->
+<!--            <li><a href="forms.html"> <i class="icon-form"></i>Forms                             </a></li>-->
+<!--            <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts                             </a></li>-->
+<!--            <li><a href="tables.html"> <i class="icon-grid"></i>Tables                             </a></li>-->
+<!--            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>-->
+<!--              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">-->
+<!--                <li><a href="#">Page</a></li>-->
+<!--                <li><a href="#">Page</a></li>-->
+<!--                <li><a href="#">Page</a></li>-->
+<!--              </ul>-->
+<!--            </li>-->
+<!--            <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page                             </a></li>-->
+<!--            <li> <a href="#"> <i class="icon-mail"></i>Demo-->
+<!--                <div class="badge badge-warning">6 New</div></a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <div class="admin-menu">-->
+<!--          <h5 class="sidenav-heading">Second menu</h5>-->
+<!--          <ul id="side-admin-menu" class="side-menu list-unstyled"> -->
+<!--            <li> <a href="#"> <i class="icon-screen"> </i>Demo</a></li>-->
+<!--            <li> <a href="#"> <i class="icon-flask"> </i>Demo-->
+<!--                <div class="badge badge-info">Special</div></a></li>-->
+<!--            <li> <a href=""> <i class="icon-flask"> </i>Demo</a></li>-->
+<!--            <li> <a href=""> <i class="icon-picture"> </i>Demo</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
     </nav>
     <div class="page">
       <!-- navbar-->
@@ -130,59 +130,11 @@
                   <div class="brand-text d-none d-md-inline-block"><span>ZKAH </span><strong class="text-primary">TBOX WEB</strong></div></a></div>
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                 <!-- Notifications dropdown-->
-                <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge badge-warning">12</span></a>
-                  <ul aria-labelledby="notifications" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification d-flex justify-content-between">
-                          <div class="notification-content"><i class="fa fa-envelope"></i>You have 6 new messages </div>
-                          <div class="notification-time"><small>4 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification d-flex justify-content-between">
-                          <div class="notification-content"><i class="fa fa-twitter"></i>You have 2 followers</div>
-                          <div class="notification-time"><small>4 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification d-flex justify-content-between">
-                          <div class="notification-content"><i class="fa fa-upload"></i>Server Rebooted</div>
-                          <div class="notification-time"><small>4 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification d-flex justify-content-between">
-                          <div class="notification-content"><i class="fa fa-twitter"></i>You have 2 followers</div>
-                          <div class="notification-time"><small>10 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i class="fa fa-bell"></i>view all notifications                                            </strong></a></li>
-                  </ul>
-                </li>
+
                 <!-- Messages dropdown-->
-                <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope"></i><span class="badge badge-info">10</span></a>
-                  <ul aria-labelledby="notifications" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
-                        <div class="msg-profile"> <img src="../static/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="msg-body">
-                          <h3 class="h5">Jason Doe</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm - 10.06.2019</small>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
-                        <div class="msg-profile"> <img src="../static/img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="msg-body">
-                          <h3 class="h5">Frank Williams</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm - 10.06.2019</small>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
-                        <div class="msg-profile"> <img src="../static/img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="msg-body">
-                          <h3 class="h5">Ashley Wood</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm - 10.06.2019</small>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i class="fa fa-envelope"></i>Read all messages    </strong></a></li>
-                  </ul>
-                </li>
+
                 <!-- Languages dropdown    -->
-                <li class="nav-item dropdown"><a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/GB.png" alt="English"><span class="d-none d-sm-inline-block">English</span></a>
-                  <ul aria-labelledby="languages" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="../static/img/flags/16/DE.png" alt="English" class="mr-2"><span>German</span></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="../static/img/flags/16/FR.png" alt="English" class="mr-2"><span>French                                                         </span></a></li>
-                  </ul>
-                </li>
+
                 <!-- Log out-->
                 <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a></li>
               </ul>
@@ -261,73 +213,98 @@
             <div class="col-lg-3 col-md-6">
               <div class="card to-do">
                 <div class="wrapper count-title d-flex">
-                  <div class="name"><strong class="text-uppercase">Controll Dashboard</strong>
-                    <h2>-----------------------------------------</h2>
-                    <h2 class="display h2">请点击按钮进行控制</h2>
-                    <h2>-----------------------------------------</h2>
+                  <div class=" card-header  align-items-center"><strong class="text-uppercase align-items-center"> T-BOX Controll Dashboard</strong>
 
-                    <ul class="check-lists list-unstyled">
-                      <li class="d-flex align-items-center">
-                        <input type="checkbox" id="left-front-lock" name="left-front-lock" class="form-control-custom">
-                        <label for="left-front-lock">左前门锁</label>
+                  <div class="card-body">
+                    <ul class="card-body check-lists list-unstyled">
+                      <li class="d-flex align-items-baseline">
+                        <div class="form-group">
+                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="左前门锁开" class="btn btn-primary">
+                          <input type="submit" value="左前门锁关" class="btn btn-danger">
+                        </div>
                       </li>
                       <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-2" name="list-2" class="form-control-custom">
-                        <label for="list-2">右前门锁</label>
+                        <div class="form-group">
+                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="右前门锁开" class="btn btn-primary">
+                          <input type="submit" value="右前门锁关" class="btn btn-danger">
+                        </div>
                       </li>
                       <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-3" name="list-3" class="form-control-custom">
-                        <label for="list-3">左后门锁 </label>
+                        <div class="form-group">
+                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="左后门锁开" class="btn btn-primary">
+                          <input type="submit" value="左后门锁关" class="btn btn-danger">
+                        </div>
                       </li>
                       <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-4" name="list-4" class="form-control-custom">
-                        <label for="list-4">右后门锁</label>
+                        <div class="form-group">
+                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="右后门锁开" class="btn btn-primary">
+                          <input type="submit" value="右后门锁关" class="btn btn-danger">
+                        </div>
                       </li>
                       <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-5" name="list-5" class="form-control-custom">
-                        <label for="list-5">左前车窗</label>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-6" name="list-6" class="form-control-custom">
-                        <label for="list-6">右前车窗 </label>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-7" name="list-7" class="form-control-custom">
-                        <label for="list-7">左后车窗</label>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-8" name="list-8" class="form-control-custom">
-                        <label for="list-8">右后车窗</label>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-9" name="list-9" class="form-control-custom">
-                        <label for="list-9">天窗</label>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <input type="checkbox" id="list-10" name="list-10" class="form-control-custom">
-                        <label for="list-10">发动机</label>
+                        <div class="form-group">
+                          <img th:src="@{/img/headwindow.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="天窗开关开" class="btn btn-primary">
+                          <input type="submit" value="天窗开关关" class="btn btn-danger">
+                        </div>
                       </li>
                     </ul>
+                  </div>
+
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6">
-              <div class="card project-progress">
+              <div class="card to-do">
                 <div class="wrapper count-title d-flex">
-                  <div class="name"><strong class="text-uppercase">location Set</strong>
-                    <h2>-----------------------------------------</h2>
-                    <h2 class="display h2">功能预设栏</h2>
-                    <h2>-----------------------------------------</h2>
-                    <h3>模拟位置1</h3>
-                    <h3>模拟位置2</h3>
-                    <h3>模拟位置3</h3>
-                    <h3>模拟位置4</h3>
-                    <h3>模拟位置5</h3>
-                    <h3>模拟位置6</h3>
-                    <h3>模拟位置6</h3>
+                  <div class=" card-header  align-items-center"><strong class="text-uppercase align-items-center"> T-BOX Controll Dashboard</strong>
+
+                    <div class="card-body">
+                    <ul class="check-lists card-body list-unstyled">
+                      <li class="d-flex align-items-center">
+                        <div class="form-group">
+                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="左前车窗开" class="btn btn-primary">
+                          <input type="submit" value="左前车窗关" class="btn btn-danger">
+                        </div>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <div class="form-group">
+                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="右前车窗开" class="btn btn-primary">
+                          <input type="submit" value="右前车窗关" class="btn btn-danger">
+                        </div>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <div class="form-group">
+                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="左后车窗开" class="btn btn-primary">
+                          <input type="submit" value="左后车窗关" class="btn btn-danger">
+                        </div>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <div class="form-group">
+                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="右后车窗开" class="btn btn-primary">
+                          <input type="submit" value="右后车窗关" class="btn btn-danger">
+                        </div>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <div class="form-group">
+                          <img th:src="@{/img/enginee.png}"  class="img-fluid rounded-circle">
+                          <input type="submit" value="发动机启动" class="btn btn-primary">
+                          <input type="submit" value="发动机关闭" class="btn btn-danger">
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
@@ -336,7 +313,7 @@
                   <div class="name"><strong class="text-uppercase">Baidu Map</strong>
                   </div>
                 </div>
-                <div style="width:780px;height:340px;border:2px solid gray" id="container"></div>
+                <div style="width:780px;height:410px;border:2px solid gray" id="container"></div>
                 <div id="info"></div>
               </div>
           </div>
@@ -356,48 +333,83 @@
           <div class="row d-flex align-items-md-stretch">
             <!-- To Do List-->
             <div class="col-lg-2 col-md-4">
-              <div class="card to-do">
-                <h2 class="display h4">行车信息展示</h2>
-                <p>-------------------------------------</p>
-                <ul class="check-lists list-unstyled">
-                  <li class="d-flex align-items-center"> 
-                    <label >左前胎压</label>
+              <div class="card-header to-do">
+                <strong class="text-uppercase align-items-center">行车信息显示</strong>
+              </div>
+              <div class="card-body">
+              <ul class="check-lists list-unstyled">
+                  <li class="d-flex align-items-center">
+                    <div class=" wrapper count-title d-flex">
+                      <div class="icon"><i class="icon-padnote"></i></div>
+                      <div class="name"><strong class="text-uppercase">左前胎压</strong>
+                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                      </div>
+                    </div>
                   </li>
-                  <li class="d-flex align-items-center"> 
-                    <label >右前胎压</label>
+                  <li class="d-flex align-items-center">
+                    <div class="wrapper count-title d-flex">
+                      <div class="icon"><i class="icon-padnote"></i></div>
+                      <div class="name"><strong class="text-uppercase">右前胎压</strong>
+                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                      </div>
+                    </div>
                   </li>
-                  <li class="d-flex align-items-center"> 
-                    <label >左后胎压 </label>
+                  <li class="d-flex align-items-center">
+                    <div class="wrapper count-title d-flex">
+                      <div class="icon"><i class="icon-padnote"></i></div>
+                      <div class="name"><strong class="text-uppercase">左后胎压</strong>
+                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                      </div>
+                    </div>
                   </li>
-                  <li class="d-flex align-items-center"> 
-                    <label >右后胎压</label>
+                  <li class="d-flex align-items-center">
+                    <div class="wrapper count-title d-flex">
+                      <div class="icon"><i class="icon-padnote"></i></div>
+                      <div class="name"><strong class="text-uppercase">右后胎压</strong>
+                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                      </div>
+                    </div>
                   </li>
-                  <li class="d-flex align-items-center"> 
-                    <label >剩余油量</label>
+                  <li class="d-flex align-items-center">
+                    <div class="wrapper count-title d-flex">
+                      <div class="icon"><i class="icon-padnote"></i></div>
+                      <div class="name"><strong class="text-uppercase">剩余油量</strong>
+                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                      </div>
+                    </div>
                   </li>
-                  <li class="d-flex align-items-center"> 
-                    <label >最近一次保养时间 </label>
-                  </li>
-                  <li class="d-flex align-items-center"> 
-                    <label >下一次保养时间</label>
-                  </li>
+<!--                  <li class="d-flex align-items-center">-->
+<!--                    <div class="wrapper count-title d-flex">-->
+<!--                      <div class="icon"><i class="icon-padnote"></i></div>-->
+<!--                      <div class="name"><strong class="text-uppercase">最近一次保养时间</strong>-->
+<!--                        <div class="name"><strong class="text-uppercase">NULL</strong></div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </li>-->
+<!--                  <li class="d-flex align-items-center">-->
+<!--                    <div class="wrapper count-title d-flex">-->
+<!--                      <div class="icon"><i class="icon-padnote"></i></div>-->
+<!--                      <div class="name"><strong class="text-uppercase">下一次保养时间</strong>-->
+<!--                        <div class="name"><strong class="text-uppercase">NULL</strong></div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </li>-->
                 </ul>
               </div>
             </div>
             <!-- Pie Chart-->
             <div class="col-lg-4 col-md-7">
-              <div class="card project-progress">
-                <h2 class="display h3">油量以及详细里程仪表盘</h2>
-                <p> ---------------------------------------</p>
-                <div class="pie-chart">
-                  <canvas id="pieChart" width="300" height="300"> </canvas>
+              <div class="card-header project-progress">
+                <strong class="text-uppercase align-items-center">油量及详细里程仪表盘</strong>              </div>
+
+              <div class="card-body pie-chart">
+                  <canvas id="pieChart" width="500" height="500"> </canvas>
                 </div>
-              </div>
             </div>
             <!-- Line Chart -->
             <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
               <div class="card sales-report">
-                <h2 class="display h4">每月油量情况及预计剩余里程情况统计</h2>
+                <strong class="text-uppercase align-items-center">每月用车情况及预计剩余里程情况统计</strong>
                 <div class="line-chart">
                   <canvas id="lineCahrt"></canvas>
                 </div>
@@ -432,15 +444,15 @@
             <div class="col-lg-4">
               <!-- User Actibity-->
               <div class="card user-activity">
-                <h2 class="display h4">里程记录</h2>
-                <div class="number">210</div>
-                <h3 class="h4 display">已行驶里程</h3>
+                <h2 class="display h4">保养记录</h2>
+                <div class="number">2020-06-22</div>
+                <h3 class="h4 display">最近一次保养时间</h3>
                 <div class="progress">
                   <div role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar bg-primary"></div>
                 </div>
                 <div class="page-statistics d-flex justify-content-between">
-                  <div class="page-statistics-left"><span>预测剩余里程</span><strong>230</strong></div>
-                  <div class="page-statistics-right"><span>完成率</span><strong>73.4%</strong></div>
+                  <div class="page-statistics-left"><span>下一次保养时间</span><strong>2020-12-31</strong></div>
+                  <div class="page-statistics-right"><span>剩余时间预测</span><strong>73days</strong></div>
                 </div>
               </div>
             </div>
