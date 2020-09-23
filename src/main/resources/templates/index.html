@@ -34,18 +34,32 @@
 
   <script>
     const options = {
-      // clientId: 'mqttId',
-      // username: 'admin',
-      // password: '123456',
+      // // clientId: 'mqttId',
+      username: '123',
+      password: '123',
       // 认证信息
     }
 
-    const client = mqtt.connect('ws://localhost:8083/mqtt', options);
+    const client = mqtt.connect('ws://192.168.3.36:8083/mqtt', options);
     client.subscribe('goods');
 
-    function send(){
+    function sendLFlockon(){
       client.publish("goods","{ \"powerswitch\": \"on\" }")
     }
+    function sendLFlockoff(){
+      client.publish("goods","{ \"powerswitch\": \"off\" }")
+    }
+
+
+    function CarMessages(name,FrameNumber,TBoxState,MobileState,mileage,Voltage){
+      this.name=name;
+      this.frameNumber=FrameNumber;
+      this.TBoxState=TBoxState;
+      this.MobileState=MobileState;
+      this.mileage=mileage;
+      this.voltage=Voltage;
+    }
+
 
     client.on('message', function (topic, message) {
       var p1 = message.toString();
@@ -55,9 +69,12 @@
       {
         var p2 = JSON.parse(p1);
         console.log(p2.name);
+        console.log(p2.frameNumber);
         if(p2.name!=null){
           document.getElementById("name").innerHTML=p2.name
-
+        }
+        if(p2.frameNumber!=null){
+          document.getElementById("frameNumber").innerHTML=p2.frameNumber
         }
         //
         // myChart.setOption(option, true)
@@ -169,7 +186,7 @@
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-padnote"></i></div>
                 <div class="name"><strong class="text-uppercase">车架号</strong><span>Frame number</span>
-                  <div class="name"><strong class="text-uppercase">ZKAH123321</strong></div>
+                  <div class="name"><strong class="text-uppercase"><span id="frameNumber"></span><br></strong></div>
                 </div>
               </div>
             </div>
@@ -229,8 +246,8 @@
                       <li class="d-flex align-items-baseline">
                         <div class="form-group">
                           <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="左前门锁开" class="btn btn-primary" onclick="send()">
-                          <input type="submit" value="左前门锁关" class="btn btn-danger">
+                          <input type="submit" value="左前门锁开" class="btn btn-primary" onclick="sendLFlockon()">
+                          <input type="submit" value="左前门锁关" class="btn btn-danger" onclick="sendLFlockoff()">
                         </div>
                       </li>
                       <li class="d-flex align-items-center">
