@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8" >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Home</title>
     <meta name="description" content="">
@@ -27,499 +27,517 @@
     <!-- Favicon-->
     <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-  </head>
-  <body>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<body>
 
-  <script>
+<script>
     const options = {
-      // // clientId: 'mqttId',
-      username: '123',
-      password: '123',
-      // 认证信息
+        // // clientId: 'mqttId',
+        username: '123',
+        password: '123',
+        // 认证信息
     }
 
     const client = mqtt.connect('ws://192.168.3.36:8083/mqtt', options);
     client.subscribe('goods');
 
-    function sendLFlockon(){
-      client.publish("goods","{ \"powerswitch\": \"on\" }")
-    }
-    function sendLFlockoff(){
-      client.publish("goods","{ \"powerswitch\": \"off\" }")
+    function sendLFlockon() {
+        client.publish("goods", "{ \"powerswitch\": \"on\" }")
     }
 
+    function sendLFlockoff() {
+        client.publish("goods", "{ \"powerswitch\": \"off\" }")
+    }
 
-    function CarMessages(name,FrameNumber,TBoxState,MobileState,mileage,Voltage){
-      this.name=name;
-      this.frameNumber=FrameNumber;
-      this.TBoxState=TBoxState;
-      this.MobileState=MobileState;
-      this.mileage=mileage;
-      this.voltage=Voltage;
+    function sendRFlockon() {
+        client.publish("goods", "{ \"RFLpowerswitch\": \"on\" }")
+    }
+
+    function sendRFlockoff() {
+        client.publish("goods", "{ \"RFLpowerswitch\": \"off\" }")
+    }
+
+    function CarMessages(name, FrameNumber, TBoxState, MobileState, mileage, Voltage) {
+        this.name = name;
+        this.frameNumber = FrameNumber;
+        this.TBoxState = TBoxState;
+        this.MobileState = MobileState;
+        this.mileage = mileage;
+        this.voltage = Voltage;
     }
 
 
     client.on('message', function (topic, message) {
-      var p1 = message.toString();
-      console.log(p1);
+        var p1 = message.toString();
+        console.log(p1);
 
-      if(topic=="goods")
-      {
-        var p2 = JSON.parse(p1);
-        console.log(p2.name);
-        console.log(p2.frameNumber);
-        if(p2.name!=null){
-          document.getElementById("name").innerHTML=p2.name
+        if (topic == "goods") {
+            var p2 = JSON.parse(p1);
+            console.log(p2.name);
+            console.log(p2.frameNumber);
+            if (p2.name != null) {
+                document.getElementById("name").innerHTML = p2.name
+            }
+            if (p2.frameNumber != null) {
+                document.getElementById("frameNumber").innerHTML = p2.frameNumber
+            }
+            //
+            // myChart.setOption(option, true)
         }
-        if(p2.frameNumber!=null){
-          document.getElementById("frameNumber").innerHTML=p2.frameNumber
-        }
-        //
-        // myChart.setOption(option, true)
-      }
-      // else if(topic=="photo")
-      // {
-      //   $("#userImge").attr("src","data:image/jpg;base64,"+p1);
-      // }
-
+        // else if(topic=="photo")
+        // {
+        //   $("#userImge").attr("src","data:image/jpg;base64,"+p1);
+        // }
 
 
     })
-
 
 
     client.on('reconnect', (error) => {
-      console.log('正在重连:', error)
+        console.log('正在重连:', error)
     })
     client.on('connect', (error) => {
-      console.log('连接成功:', error)
+        console.log('连接成功:', error)
     })
     client.on('error', (error) => {
-      console.log('连接失败:', error)
+        console.log('连接失败:', error)
     })
 
 
-  </script>
-    <!-- Side Navbar -->
-    <nav class="side-navbar">
-      <div class="side-navbar-wrapper">
+</script>
+<!-- Side Navbar -->
+<nav class="side-navbar">
+    <div class="side-navbar-wrapper">
         <!-- Sidebar Header    -->
         <div class="sidenav-header d-flex align-items-center justify-content-center">
-          <!-- User Info-->
-          <div class="sidenav-header-inner text-center"><img th:src="@{/img/squrtle.jpg}"  class="img-fluid rounded-circle">
-            <h2 class="h5" th:text="${loginUsername}"></h2><span>admin</span>
-          </div>
-          <!-- Small Brand information, appears on minimized sidebar-->
-          <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>B</strong><strong class="text-primary">D</strong></a></div>
+            <!-- User Info-->
+            <div class="sidenav-header-inner text-center"><img th:src="@{/img/squrtle.jpg}"
+                                                               class="img-fluid rounded-circle">
+                <h2 class="h5" th:text="${loginUsername}"></h2><span>admin</span>
+            </div>
+            <!-- Small Brand information, appears on minimized sidebar-->
+            <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center">
+                <strong>B</strong><strong class="text-primary">D</strong></a></div>
         </div>
         <!-- Sidebar Navigation Menus-->
-<!--        <div class="main-menu">-->
-<!--          <h5 class="sidenav-heading">Main</h5>-->
-<!--          <ul id="side-main-menu" class="side-menu list-unstyled">                  -->
-<!--            <li><a href="index.html"> <i class="icon-home"></i>Home                             </a></li>-->
-<!--            <li><a href="forms.html"> <i class="icon-form"></i>Forms                             </a></li>-->
-<!--            <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts                             </a></li>-->
-<!--            <li><a href="tables.html"> <i class="icon-grid"></i>Tables                             </a></li>-->
-<!--            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>-->
-<!--              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">-->
-<!--                <li><a href="#">Page</a></li>-->
-<!--                <li><a href="#">Page</a></li>-->
-<!--                <li><a href="#">Page</a></li>-->
-<!--              </ul>-->
-<!--            </li>-->
-<!--            <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page                             </a></li>-->
-<!--            <li> <a href="#"> <i class="icon-mail"></i>Demo-->
-<!--                <div class="badge badge-warning">6 New</div></a></li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--        <div class="admin-menu">-->
-<!--          <h5 class="sidenav-heading">Second menu</h5>-->
-<!--          <ul id="side-admin-menu" class="side-menu list-unstyled"> -->
-<!--            <li> <a href="#"> <i class="icon-screen"> </i>Demo</a></li>-->
-<!--            <li> <a href="#"> <i class="icon-flask"> </i>Demo-->
-<!--                <div class="badge badge-info">Special</div></a></li>-->
-<!--            <li> <a href=""> <i class="icon-flask"> </i>Demo</a></li>-->
-<!--            <li> <a href=""> <i class="icon-picture"> </i>Demo</a></li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </div>-->
-    </nav>
-    <div class="page">
-      <!-- navbar-->
-      <header class="header">
+        <!--        <div class="main-menu">-->
+        <!--          <h5 class="sidenav-heading">Main</h5>-->
+        <!--          <ul id="side-main-menu" class="side-menu list-unstyled">                  -->
+        <!--            <li><a href="index.html"> <i class="icon-home"></i>Home                             </a></li>-->
+        <!--            <li><a href="forms.html"> <i class="icon-form"></i>Forms                             </a></li>-->
+        <!--            <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts                             </a></li>-->
+        <!--            <li><a href="tables.html"> <i class="icon-grid"></i>Tables                             </a></li>-->
+        <!--            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>-->
+        <!--              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">-->
+        <!--                <li><a href="#">Page</a></li>-->
+        <!--                <li><a href="#">Page</a></li>-->
+        <!--                <li><a href="#">Page</a></li>-->
+        <!--              </ul>-->
+        <!--            </li>-->
+        <!--            <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page                             </a></li>-->
+        <!--            <li> <a href="#"> <i class="icon-mail"></i>Demo-->
+        <!--                <div class="badge badge-warning">6 New</div></a></li>-->
+        <!--          </ul>-->
+        <!--        </div>-->
+        <!--        <div class="admin-menu">-->
+        <!--          <h5 class="sidenav-heading">Second menu</h5>-->
+        <!--          <ul id="side-admin-menu" class="side-menu list-unstyled"> -->
+        <!--            <li> <a href="#"> <i class="icon-screen"> </i>Demo</a></li>-->
+        <!--            <li> <a href="#"> <i class="icon-flask"> </i>Demo-->
+        <!--                <div class="badge badge-info">Special</div></a></li>-->
+        <!--            <li> <a href=""> <i class="icon-flask"> </i>Demo</a></li>-->
+        <!--            <li> <a href=""> <i class="icon-picture"> </i>Demo</a></li>-->
+        <!--          </ul>-->
+        <!--        </div>-->
+        <!--      </div>-->
+</nav>
+<div class="page">
+    <!-- navbar-->
+    <header class="header">
         <nav class="navbar">
-          <div class="container-fluid">
-            <div class="navbar-holder d-flex align-items-center justify-content-between">
-              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
-                  <div class="brand-text d-none d-md-inline-block"><span>ZKAH </span><strong class="text-primary">TBOX WEB</strong></div></a></div>
-              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                <!-- Notifications dropdown-->
+            <div class="container-fluid">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i
+                            class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
+                        <div class="brand-text d-none d-md-inline-block"><span>ZKAH </span><strong class="text-primary">TBOX
+                            WEB</strong></div>
+                    </a></div>
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                        <!-- Notifications dropdown-->
 
-                <!-- Messages dropdown-->
+                        <!-- Messages dropdown-->
 
-                <!-- Languages dropdown    -->
+                        <!-- Languages dropdown    -->
 
-                <!-- Log out-->
-                <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a></li>
-              </ul>
+                        <!-- Log out-->
+                        <li class="nav-item"><a href="login.html" class="nav-link logout"> <span
+                                class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </nav>
-      </header>
-      <!-- Counts Section -->
-      <section class="dashboard-counts section-padding">
+    </header>
+    <!-- Counts Section -->
+    <section class="dashboard-counts section-padding">
         <div class="container-fluid">
-          <div class="row">
-            <!-- Count item widget-->
-            <div class="col-xl-2 col-md-4 col-6">
-              <div class="wrapper count-title d-flex">
-                <div class="icon"><i class="icon-user"></i></div>
-                <div class="name"><strong class="text-uppercase">车牌号</strong><span>number plate</span>
-                  <div class="name"><strong class="text-uppercase"><span id="name"></span><br> </strong></div>
+            <div class="row">
+                <!-- Count item widget-->
+                <div class="col-xl-2 col-md-4 col-6">
+                    <div class="wrapper count-title d-flex">
+                        <div class="icon"><i class="icon-user"></i></div>
+                        <div class="name"><strong class="text-uppercase">车牌号</strong><span>number plate</span>
+                            <div class="name"><strong class="text-uppercase"><span id="name"></span><br> </strong></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <!-- Count item widget-->
-            <div class="col-xl-2 col-md-4 col-6">
-              <div class="wrapper count-title d-flex">
-                <div class="icon"><i class="icon-padnote"></i></div>
-                <div class="name"><strong class="text-uppercase">车架号</strong><span>Frame number</span>
-                  <div class="name"><strong class="text-uppercase"><span id="frameNumber"></span><br></strong></div>
+                <!-- Count item widget-->
+                <div class="col-xl-2 col-md-4 col-6">
+                    <div class="wrapper count-title d-flex">
+                        <div class="icon"><i class="icon-padnote"></i></div>
+                        <div class="name"><strong class="text-uppercase">车架号</strong><span>Frame number</span>
+                            <div class="name"><strong class="text-uppercase"><span id="frameNumber"></span><br></strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <!-- Count item widget-->
-            <div class="col-xl-2 col-md-4 col-6">
-              <div class="wrapper count-title d-flex">
-                <div class="icon"><i class="icon-check"></i></div>
-                <div class="name"><strong class="text-uppercase">TBOX在线</strong><span>TBOX ONLINE</span>
-                  <div class="name"><strong class="text-uppercase">OFF</strong></div>
+                <!-- Count item widget-->
+                <div class="col-xl-2 col-md-4 col-6">
+                    <div class="wrapper count-title d-flex">
+                        <div class="icon"><i class="icon-check"></i></div>
+                        <div class="name"><strong class="text-uppercase">TBOX在线</strong><span>TBOX ONLINE</span>
+                            <div class="name"><strong class="text-uppercase">OFF</strong></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <!-- Count item widget-->
-            <div class="col-xl-2 col-md-4 col-6">
-              <div class="wrapper count-title d-flex">
-                <div class="icon"><i class="icon-bill"></i></div>
-                <div class="name"><strong class="text-uppercase">手机在线</strong><span>Mobile Online</span>
-                  <div class="name"><strong class="text-uppercase">OFF</strong></div>
+                <!-- Count item widget-->
+                <div class="col-xl-2 col-md-4 col-6">
+                    <div class="wrapper count-title d-flex">
+                        <div class="icon"><i class="icon-bill"></i></div>
+                        <div class="name"><strong class="text-uppercase">手机在线</strong><span>Mobile Online</span>
+                            <div class="name"><strong class="text-uppercase">OFF</strong></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <!-- Count item widget-->
-            <div class="col-xl-2 col-md-4 col-6">
-              <div class="wrapper count-title d-flex">
-                <div class="icon"><i class="icon-list"></i></div>
-                <div class="name"><strong class="text-uppercase">里程</strong><span>mileage</span>
-                  <div class="name"><strong class="text-uppercase">31651km</strong></div>
+                <!-- Count item widget-->
+                <div class="col-xl-2 col-md-4 col-6">
+                    <div class="wrapper count-title d-flex">
+                        <div class="icon"><i class="icon-list"></i></div>
+                        <div class="name"><strong class="text-uppercase">里程</strong><span>mileage</span>
+                            <div class="name"><strong class="text-uppercase">31651km</strong></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <!-- Count item widget-->
-            <div class="col-xl-2 col-md-4 col-6">
-              <div class="wrapper count-title d-flex">
-                <div class="icon"><i class="icon-list-1"></i></div>
-                <div class="name"><strong class="text-uppercase">电压</strong><span>Voltage</span>
-                  <div class="name"><strong class="text-uppercase">12.6v</strong></div>
+                <!-- Count item widget-->
+                <div class="col-xl-2 col-md-4 col-6">
+                    <div class="wrapper count-title d-flex">
+                        <div class="icon"><i class="icon-list-1"></i></div>
+                        <div class="name"><strong class="text-uppercase">电压</strong><span>Voltage</span>
+                            <div class="name"><strong class="text-uppercase">12.6v</strong></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
 
-
-      <section class="dashboard-counts section-padding">
+    <section class="dashboard-counts section-padding">
 
         <div class="container-fluid">
-          <div class="row d-flex align-items-md-stretch">
-            <div class="col-lg-3 col-md-6">
-              <div class="card to-do">
-                <div class="wrapper count-title d-flex">
-                  <div class=" card-header  align-items-center"><strong class="text-uppercase align-items-center"> T-BOX Controll Dashboard</strong>
+            <div class="row d-flex align-items-md-stretch">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card to-do">
+                        <div class="wrapper count-title d-flex">
+                            <div class=" card-header  align-items-center"><strong
+                                    class="text-uppercase align-items-center"> T-BOX Controll Dashboard</strong>
 
-                  <div class="card-body">
-                    <ul class="card-body check-lists list-unstyled">
-                      <li class="d-flex align-items-baseline">
-                        <div class="form-group">
-                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="左前门锁开" class="btn btn-primary" onclick="sendLFlockon()">
-                          <input type="submit" value="左前门锁关" class="btn btn-danger" onclick="sendLFlockoff()">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="右前门锁开" class="btn btn-primary">
-                          <input type="submit" value="右前门锁关" class="btn btn-danger">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="左后门锁开" class="btn btn-primary">
-                          <input type="submit" value="左后门锁关" class="btn btn-danger">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/lock.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="右后门锁开" class="btn btn-primary">
-                          <input type="submit" value="右后门锁关" class="btn btn-danger">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/headwindow.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="天窗开关开" class="btn btn-primary">
-                          <input type="submit" value="天窗开关关" class="btn btn-danger">
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                                <div class="card-body">
+                                    <ul class="card-body check-lists list-unstyled">
+                                        <li class="d-flex align-items-baseline">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/lock.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="左前门锁开" class="btn btn-primary"
+                                                       onclick="sendLFlockon()">
+                                                <input type="submit" value="左前门锁关" class="btn btn-danger"
+                                                       onclick="sendLFlockoff()">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/lock.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="右前门锁开" class="btn btn-primary" onclick="sendRFlockon()">
+                                                <input type="submit" value="右前门锁关" class="btn btn-danger" onclick="sendRFlockoff()">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/lock.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="左后门锁开" class="btn btn-primary">
+                                                <input type="submit" value="左后门锁关" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/lock.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="右后门锁开" class="btn btn-primary">
+                                                <input type="submit" value="右后门锁关" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/headwindow.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="天窗开关开" class="btn btn-primary">
+                                                <input type="submit" value="天窗开关关" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                  </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              <div class="card to-do">
-                <div class="wrapper count-title d-flex">
-                  <div class=" card-header  align-items-center"><strong class="text-uppercase align-items-center"> T-BOX Controll Dashboard</strong>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card to-do">
+                        <div class="wrapper count-title d-flex">
+                            <div class=" card-header  align-items-center"><strong
+                                    class="text-uppercase align-items-center"> T-BOX Controll Dashboard</strong>
 
+                                <div class="card-body">
+                                    <ul class="check-lists card-body list-unstyled">
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/window.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="左前车窗开" class="btn btn-primary">
+                                                <input type="submit" value="左前车窗关" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/window.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="右前车窗开" class="btn btn-primary">
+                                                <input type="submit" value="右前车窗关" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/window.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="左后车窗开" class="btn btn-primary">
+                                                <input type="submit" value="左后车窗关" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/window.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="右后车窗开" class="btn btn-primary">
+                                                <input type="submit" value="右后车窗关" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <div class="form-group">
+                                                <img th:src="@{/img/enginee.png}" class="img-fluid rounded-circle">
+                                                <input type="submit" value="发动机启动" class="btn btn-primary">
+                                                <input type="submit" value="发动机关闭" class="btn btn-danger">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+                    <div class="card sales-report">
+                        <div class="wrapper count-title d-flex">
+                            <div class="name"><strong class="text-uppercase">Baidu Map</strong>
+                            </div>
+                        </div>
+                        <div style="width:780px;height:410px;border:2px solid gray" id="container"></div>
+                        <div id="info"></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Header Section-->
+    <section class="dashboard-header section-padding">
+        <div class="container-fluid">
+            <div class="row d-flex align-items-md-stretch">
+                <!-- To Do List-->
+                <div class="col-lg-2 col-md-4">
+                    <div class="card-header to-do">
+                        <strong class="text-uppercase align-items-center">行车信息显示</strong>
+                    </div>
                     <div class="card-body">
-                    <ul class="check-lists card-body list-unstyled">
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="左前车窗开" class="btn btn-primary">
-                          <input type="submit" value="左前车窗关" class="btn btn-danger">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="右前车窗开" class="btn btn-primary">
-                          <input type="submit" value="右前车窗关" class="btn btn-danger">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="左后车窗开" class="btn btn-primary">
-                          <input type="submit" value="左后车窗关" class="btn btn-danger">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/window.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="右后车窗开" class="btn btn-primary">
-                          <input type="submit" value="右后车窗关" class="btn btn-danger">
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <div class="form-group">
-                          <img th:src="@{/img/enginee.png}"  class="img-fluid rounded-circle">
-                          <input type="submit" value="发动机启动" class="btn btn-primary">
-                          <input type="submit" value="发动机关闭" class="btn btn-danger">
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                        <ul class="check-lists list-unstyled">
+                            <li class="d-flex align-items-center">
+                                <div class=" wrapper count-title d-flex">
+                                    <div class="icon"><i class="icon-padnote"></i></div>
+                                    <div class="name"><strong class="text-uppercase">左前胎压</strong>
+                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="wrapper count-title d-flex">
+                                    <div class="icon"><i class="icon-padnote"></i></div>
+                                    <div class="name"><strong class="text-uppercase">右前胎压</strong>
+                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="wrapper count-title d-flex">
+                                    <div class="icon"><i class="icon-padnote"></i></div>
+                                    <div class="name"><strong class="text-uppercase">左后胎压</strong>
+                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="wrapper count-title d-flex">
+                                    <div class="icon"><i class="icon-padnote"></i></div>
+                                    <div class="name"><strong class="text-uppercase">右后胎压</strong>
+                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="wrapper count-title d-flex">
+                                    <div class="icon"><i class="icon-padnote"></i></div>
+                                    <div class="name"><strong class="text-uppercase">剩余油量</strong>
+                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--                  <li class="d-flex align-items-center">-->
+                            <!--                    <div class="wrapper count-title d-flex">-->
+                            <!--                      <div class="icon"><i class="icon-padnote"></i></div>-->
+                            <!--                      <div class="name"><strong class="text-uppercase">最近一次保养时间</strong>-->
+                            <!--                        <div class="name"><strong class="text-uppercase">NULL</strong></div>-->
+                            <!--                      </div>-->
+                            <!--                    </div>-->
+                            <!--                  </li>-->
+                            <!--                  <li class="d-flex align-items-center">-->
+                            <!--                    <div class="wrapper count-title d-flex">-->
+                            <!--                      <div class="icon"><i class="icon-padnote"></i></div>-->
+                            <!--                      <div class="name"><strong class="text-uppercase">下一次保养时间</strong>-->
+                            <!--                        <div class="name"><strong class="text-uppercase">NULL</strong></div>-->
+                            <!--                      </div>-->
+                            <!--                    </div>-->
+                            <!--                  </li>-->
+                        </ul>
+                    </div>
                 </div>
-              </div>
-              </div>
-            </div>
-          <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
-                <div class="card sales-report">
-                <div class="wrapper count-title d-flex">
-                  <div class="name"><strong class="text-uppercase">Baidu Map</strong>
-                  </div>
+                <!-- Pie Chart-->
+                <div class="col-lg-4 col-md-7">
+                    <div class="card-header project-progress">
+                        <strong class="text-uppercase align-items-center">油量及详细里程仪表盘</strong></div>
+
+                    <div class="card-body pie-chart">
+                        <canvas id="pieChart" width="500" height="500"></canvas>
+                    </div>
                 </div>
-                <div style="width:780px;height:410px;border:2px solid gray" id="container"></div>
-                <div id="info"></div>
-              </div>
-          </div>
-
-
-          </div>
-          </div>
-      </section>
-
-
-
-
-
-      <!-- Header Section-->
-      <section class="dashboard-header section-padding">
-        <div class="container-fluid">
-          <div class="row d-flex align-items-md-stretch">
-            <!-- To Do List-->
-            <div class="col-lg-2 col-md-4">
-              <div class="card-header to-do">
-                <strong class="text-uppercase align-items-center">行车信息显示</strong>
-              </div>
-              <div class="card-body">
-              <ul class="check-lists list-unstyled">
-                  <li class="d-flex align-items-center">
-                    <div class=" wrapper count-title d-flex">
-                      <div class="icon"><i class="icon-padnote"></i></div>
-                      <div class="name"><strong class="text-uppercase">左前胎压</strong>
-                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
-                      </div>
+                <!-- Line Chart -->
+                <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+                    <div class="card-header sales-report">
+                        <strong class="text-uppercase align-items-center">每月用车情况及预计剩余里程情况统计</strong>
                     </div>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <div class="wrapper count-title d-flex">
-                      <div class="icon"><i class="icon-padnote"></i></div>
-                      <div class="name"><strong class="text-uppercase">右前胎压</strong>
-                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
-                      </div>
+                    <div class="card-body line-chart">
+                        <canvas id="lineCahrt"></canvas>
                     </div>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <div class="wrapper count-title d-flex">
-                      <div class="icon"><i class="icon-padnote"></i></div>
-                      <div class="name"><strong class="text-uppercase">左后胎压</strong>
-                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <div class="wrapper count-title d-flex">
-                      <div class="icon"><i class="icon-padnote"></i></div>
-                      <div class="name"><strong class="text-uppercase">右后胎压</strong>
-                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <div class="wrapper count-title d-flex">
-                      <div class="icon"><i class="icon-padnote"></i></div>
-                      <div class="name"><strong class="text-uppercase">剩余油量</strong>
-                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
-                      </div>
-                    </div>
-                  </li>
-<!--                  <li class="d-flex align-items-center">-->
-<!--                    <div class="wrapper count-title d-flex">-->
-<!--                      <div class="icon"><i class="icon-padnote"></i></div>-->
-<!--                      <div class="name"><strong class="text-uppercase">最近一次保养时间</strong>-->
-<!--                        <div class="name"><strong class="text-uppercase">NULL</strong></div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  <li class="d-flex align-items-center">-->
-<!--                    <div class="wrapper count-title d-flex">-->
-<!--                      <div class="icon"><i class="icon-padnote"></i></div>-->
-<!--                      <div class="name"><strong class="text-uppercase">下一次保养时间</strong>-->
-<!--                        <div class="name"><strong class="text-uppercase">NULL</strong></div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
-                </ul>
-              </div>
-            </div>
-            <!-- Pie Chart-->
-            <div class="col-lg-4 col-md-7">
-              <div class="card-header project-progress">
-                <strong class="text-uppercase align-items-center">油量及详细里程仪表盘</strong>              </div>
-
-              <div class="card-body pie-chart">
-                  <canvas id="pieChart" width="500" height="500"> </canvas>
                 </div>
             </div>
-            <!-- Line Chart -->
-            <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
-              <div class="card-header sales-report">
-                <strong class="text-uppercase align-items-center">每月用车情况及预计剩余里程情况统计</strong>
-              </div>
-              <div class="card-body line-chart">
-                  <canvas id="lineCahrt"></canvas>
-                </div>
-            </div>
-          </div>
         </div>
-      </section>
-      <!-- Statistics Section-->
-      <section class="statistics">
+    </section>
+    <!-- Statistics Section-->
+    <section class="statistics">
         <div class="container-fluid">
-          <div class="row d-flex">
-            <div class="col-lg-4">
-              <!-- Income-->
-              <div class="card income text-center">
-                <div class="icon"><i class="icon-line-chart"></i></div>
-                <div class="number">8,577</div><strong class="text-primary">总计里程数</strong>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <!-- Monthly Usage-->
-              <div class="card data-usage">
-                <h2 class="display h4">每月用油</h2>
-                <div class="row d-flex align-items-center">
-                  <div class="col-sm-6">
-                    <div id="progress-circle" class="d-flex align-items-center justify-content-center"></div>
-                  </div>
-                  <div class="col-sm-6"><strong class="text-primary">80.56 L</strong><small>Current Plan</small><span>100 L Monthly</span></div>
+            <div class="row d-flex">
+                <div class="col-lg-4">
+                    <!-- Income-->
+                    <div class="card income text-center">
+                        <div class="icon"><i class="icon-line-chart"></i></div>
+                        <div class="number">8,577</div>
+                        <strong class="text-primary">总计里程数</strong>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <!-- User Actibity-->
-              <div class="card user-activity">
-                <h2 class="display h4">保养记录</h2>
-                <div class="number">2020-06-22</div>
-                <h3 class="h4 display">最近一次保养时间</h3>
-                <div class="progress">
-                  <div role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar bg-primary"></div>
+                <div class="col-lg-4">
+                    <!-- Monthly Usage-->
+                    <div class="card data-usage">
+                        <h2 class="display h4">每月用油</h2>
+                        <div class="row d-flex align-items-center">
+                            <div class="col-sm-6">
+                                <div id="progress-circle"
+                                     class="d-flex align-items-center justify-content-center"></div>
+                            </div>
+                            <div class="col-sm-6"><strong class="text-primary">80.56 L</strong><small>Current
+                                Plan</small><span>100 L Monthly</span></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="page-statistics d-flex justify-content-between">
-                  <div class="page-statistics-left"><span>下一次保养时间</span><strong>2020-12-31</strong></div>
-                  <div class="page-statistics-right"><span>剩余时间预测</span><strong>73days</strong></div>
+                <div class="col-lg-4">
+                    <!-- User Actibity-->
+                    <div class="card user-activity">
+                        <h2 class="display h4">保养记录</h2>
+                        <div class="number">2020-06-22</div>
+                        <h3 class="h4 display">最近一次保养时间</h3>
+                        <div class="progress">
+                            <div role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                 aria-valuemax="100" class="progress-bar progress-bar bg-primary"></div>
+                        </div>
+                        <div class="page-statistics d-flex justify-content-between">
+                            <div class="page-statistics-left"><span>下一次保养时间</span><strong>2020-12-31</strong></div>
+                            <div class="page-statistics-right"><span>剩余时间预测</span><strong>73days</strong></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
 
 
-      </section>
+    </section>
 
-      <footer class="main-footer">
+    <footer class="main-footer">
         <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-6">
-              <p>Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Copyright &copy; 2019.Company name All rights reserved.<a target="_blank"
+                                                                                 href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    </p>
+                </div>
+                <div class="col-sm-6 text-right">
+
+
+                </div>
             </div>
-            <div class="col-sm-6 text-right">
-              
-              
-            </div>
-          </div>
         </div>
-      </footer>
-    </div>
-    <!-- JavaScript files-->
-  <script  src="http://api.map.baidu.com/api?v=2.0&ak=TyG1fMgAyRV8bjmDdNTyGU1Ut4gDUAjK"></script>
-  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{/vendor/popper.js/umd/popper.min.js}"> </script>
-    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/grasp_mobile_progress_circle-1.0.0.min.js}"></script>
-    <script th:src="@{/vendor/jquery.cookie/jquery.cookie.js}"> </script>
-    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
-    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
-    <script th:src="@{/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
-    <script th:src="@{/js/charts-home.js}"></script>
-    <!-- Main File-->
-    <script th:src="@{/js/front.js}"></script>
-  </body>
-  <script>
+    </footer>
+</div>
+<!-- JavaScript files-->
+<script src="http://api.map.baidu.com/api?v=2.0&ak=TyG1fMgAyRV8bjmDdNTyGU1Ut4gDUAjK"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/grasp_mobile_progress_circle-1.0.0.min.js}"></script>
+<script th:src="@{/vendor/jquery.cookie/jquery.cookie.js}"></script>
+<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+<script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+<script th:src="@{/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script th:src="@{/js/charts-home.js}"></script>
+<!-- Main File-->
+<script th:src="@{/js/front.js}"></script>
+</body>
+<script>
     var map = new BMap.Map("container");
-    var point = new BMap.Point(117.128548,31.827997)// 创建Map实例
-    map.centerAndZoom(point,17);     // 初始化地图,设置中心点坐标和地图级别
+    var point = new BMap.Point(117.128548, 31.827997)// 创建Map实例
+    map.centerAndZoom(point, 17);     // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom();
     var marker = new BMap.Marker(point);
     map.addOverlay(marker);
@@ -541,35 +559,35 @@
     //   }
     // },{enableHighAccuracy: true})
 
-    function startTool(){   //开关函数
-      if(key==1){
-        document.getElementById("startBtn").style.background = "green";
-        document.getElementById("startBtn").style.color = "white";
-        document.getElementById("startBtn").value = "开启状态";
-        key=0;
-      }
-      else{
-        document.getElementById("startBtn").style.background = "red";
-        document.getElementById("startBtn").value = "关闭状态";
-        key=1;
-      }
+    function startTool() {   //开关函数
+        if (key == 1) {
+            document.getElementById("startBtn").style.background = "green";
+            document.getElementById("startBtn").style.color = "white";
+            document.getElementById("startBtn").value = "开启状态";
+            key = 0;
+        } else {
+            document.getElementById("startBtn").style.background = "red";
+            document.getElementById("startBtn").value = "关闭状态";
+            key = 1;
+        }
     }
-    map.addEventListener("click",function(e){   //单击地图，形成折线覆盖物
-      newpoint = new BMap.Point(e.point.lng,e.point.lat);
-      if(key==0){
-        //    if(points[points.length].lng==points[points.length-1].lng){alert(111);}
-        points.push(newpoint);  //将新增的点放到数组中
-        polyline.setPath(points);   //设置折线的点数组
-        map.addOverlay(polyline);   //将折线添加到地图上
-        document.getElementById("info").innerHTML += "new BMap.Point(" + e.point.lng + "," + e.point.lat + "),</br>";    //输出数组里的经纬度
-      }
+
+    map.addEventListener("click", function (e) {   //单击地图，形成折线覆盖物
+        newpoint = new BMap.Point(e.point.lng, e.point.lat);
+        if (key == 0) {
+            //    if(points[points.length].lng==points[points.length-1].lng){alert(111);}
+            points.push(newpoint);  //将新增的点放到数组中
+            polyline.setPath(points);   //设置折线的点数组
+            map.addOverlay(polyline);   //将折线添加到地图上
+            document.getElementById("info").innerHTML += "new BMap.Point(" + e.point.lng + "," + e.point.lat + "),</br>";    //输出数组里的经纬度
+        }
     });
-    map.addEventListener("dblclick",function(e){   //双击地图，形成多边形覆盖物
-      if(key==0){
+    map.addEventListener("dblclick", function (e) {   //双击地图，形成多边形覆盖物
+        if (key == 0) {
 //      map.disableDoubleClickZoom();   //关闭双击放大
-        var polygon = new BMap.Polygon(points);
-        map.addOverlay(polygon);   //将折线添加到地图上
-      }
+            var polygon = new BMap.Polygon(points);
+            map.addOverlay(polygon);   //将折线添加到地图上
+        }
     });
-  </script>
+</script>
 </html>
