@@ -40,7 +40,7 @@
         // 认证信息
     }
 
-    const client = mqtt.connect('ws://192.168.3.36:8083/mqtt', options);
+    const client = mqtt.connect('ws://broker.zkanghui.com:8083/mqtt', options);
     client.subscribe('goods');
 
     function sendLFlockon() {
@@ -68,21 +68,46 @@
         this.voltage = Voltage;
     }
 
-
+    function getValueByKey (data, field) {
+        for (let key in data) {
+            if (key === field) {
+                return data[key];
+            }
+            if (typeof(data[key]) === 'object' && data[key].length === undefined) {
+                return getValueByKey(data[key], field);
+            }
+        }
+    }
     client.on('message', function (topic, message) {
         var p1 = message.toString();
         console.log(p1);
 
+
         if (topic == "goods") {
-            var p2 = JSON.parse(p1);
-            console.log(p2.name);
-            console.log(p2.frameNumber);
-            if (p2.name != null) {
-                document.getElementById("name").innerHTML = p2.name
-            }
-            if (p2.frameNumber != null) {
-                document.getElementById("frameNumber").innerHTML = p2.frameNumber
-            }
+            var p2= JSON.parse(p1);
+            document.getElementById("result0").innerHTML = p2.TirePressure[0]
+            document.getElementById("result1").innerHTML = p2.TirePressure[1]
+            document.getElementById("result2").innerHTML = p2.TirePressure[2]
+            document.getElementById("result3").innerHTML = p2.TirePressure[3]
+            document.getElementById("FrameNumber").innerHTML = p2.FrameNumber
+            document.getElementById("PlateNumber").innerHTML = p2.PlateNumber
+            document.getElementById("OilVolume").innerHTML = p2.OilVolume
+            document.getElementById("Distance").innerHTML = p2.Distance
+
+
+
+
+            // var p2 = getValueByKey(p1,'Driven');
+            // console.log(p2);
+            // var driven = JSON.parse(p2);
+            // console.log(driven.Driven);
+            // console.log(p2.frameNumber);
+            // if (p2.name != null) {
+            //     document.getElementById("name").innerHTML = p2.name
+            // }
+            // if (p2.frameNumber != null) {
+            //     document.getElementById("frameNumber").innerHTML = p2.frameNumber
+            // }
             //
             // myChart.setOption(option, true)
         }
@@ -188,7 +213,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-user"></i></div>
                         <div class="name"><strong class="text-uppercase">车牌号</strong><span>number plate</span>
-                            <div class="name"><strong class="text-uppercase"><span id="name"></span><br> </strong></div>
+                            <div class="name"><strong class="text-uppercase"id="PlateNumber"> </strong></div>
                         </div>
                     </div>
                 </div>
@@ -197,7 +222,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-padnote"></i></div>
                         <div class="name"><strong class="text-uppercase">车架号</strong><span>Frame number</span>
-                            <div class="name"><strong class="text-uppercase"><span id="frameNumber"></span><br></strong>
+                            <div class="name"><strong class="text-uppercase"id="FrameNumber"></strong>
                             </div>
                         </div>
                     </div>
@@ -225,7 +250,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-list"></i></div>
                         <div class="name"><strong class="text-uppercase">里程</strong><span>mileage</span>
-                            <div class="name"><strong class="text-uppercase">31651km</strong></div>
+                            <div class="name"><strong class="text-uppercase" id="Distance" ></strong></div>
                         </div>
                     </div>
                 </div>
@@ -380,7 +405,7 @@
                                 <div class=" wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">左前胎压</strong>
-                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result0"></strong></div>
                                     </div>
                                 </div>
                             </li>
@@ -388,7 +413,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">右前胎压</strong>
-                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result1"></strong></div>
                                     </div>
                                 </div>
                             </li>
@@ -396,7 +421,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">左后胎压</strong>
-                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result2"></strong></div>
                                     </div>
                                 </div>
                             </li>
@@ -404,7 +429,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">右后胎压</strong>
-                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result3"></strong></div>
                                     </div>
                                 </div>
                             </li>
@@ -412,7 +437,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">剩余油量</strong>
-                                        <div class="name"><strong class="text-uppercase">NULL</strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="OilVolume"></strong></div>
                                     </div>
                                 </div>
                             </li>
