@@ -12,6 +12,7 @@
     <artifactId>mqttjs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mqttjs</name>
+    <packaging>jar</packaging>
     <description>mqttjs Demo project for Spring Boot</description>
 
     <properties>

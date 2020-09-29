@@ -41,22 +41,22 @@
     }
 
     const client = mqtt.connect('ws://broker.zkanghui.com:8083/mqtt', options);
-    client.subscribe('goods');
+    client.subscribe('carMessage');
 
     function sendLFlockon() {
-        client.publish("goods", "{ \"powerswitch\": \"on\" }")
+        client.publish("carMessage", "{ \"powerswitch\": \"on\" }")
     }
 
     function sendLFlockoff() {
-        client.publish("goods", "{ \"powerswitch\": \"off\" }")
+        client.publish("carMessage", "{ \"powerswitch\": \"off\" }")
     }
 
     function sendRFlockon() {
-        client.publish("goods", "{ \"RFLpowerswitch\": \"on\" }")
+        client.publish("carMessage", "{ \"RFLpowerswitch\": \"on\" }")
     }
 
     function sendRFlockoff() {
-        client.publish("goods", "{ \"RFLpowerswitch\": \"off\" }")
+        client.publish("carMessage", "{ \"RFLpowerswitch\": \"off\" }")
     }
 
     function CarMessages(name, FrameNumber, TBoxState, MobileState, mileage, Voltage) {
@@ -83,16 +83,32 @@
         console.log(p1);
 
 
-        if (topic == "goods") {
+        if (topic == "carMessage") {
             var p2= JSON.parse(p1);
-            document.getElementById("result0").innerHTML = p2.TirePressure[0]
-            document.getElementById("result1").innerHTML = p2.TirePressure[1]
-            document.getElementById("result2").innerHTML = p2.TirePressure[2]
-            document.getElementById("result3").innerHTML = p2.TirePressure[3]
-            document.getElementById("FrameNumber").innerHTML = p2.FrameNumber
-            document.getElementById("PlateNumber").innerHTML = p2.PlateNumber
-            document.getElementById("OilVolume").innerHTML = p2.OilVolume
-            document.getElementById("Distance").innerHTML = p2.Distance
+            if (p2.TirePressure!=null){
+                document.getElementById("result0").innerHTML = p2.TirePressure[0]
+                document.getElementById("result1").innerHTML = p2.TirePressure[1]
+                document.getElementById("result2").innerHTML = p2.TirePressure[2]
+                document.getElementById("result3").innerHTML = p2.TirePressure[3]
+            }
+            if (p2.FrameNumber!=null){
+                document.getElementById("FrameNumber").innerHTML = p2.FrameNumber
+            }
+            if (p2.PlateNumber!=null){
+                document.getElementById("PlateNumber").innerHTML = p2.PlateNumber
+            }
+            if (p2.OilVolume!=null){
+                document.getElementById("OilVolume").innerHTML = p2.OilVolume
+            }
+            if (p2.Distance!=null){
+                document.getElementById("Distance").innerHTML = p2.Distance
+            }
+            if (p2.LastMaintanceTime!=null){
+                document.getElementById("LastMaintanceTime").innerHTML = p2.LastMaintanceTime
+            }
+            if (p2.Speed!=null){
+                document.getElementById("Speed").innerHTML = p2.Speed
+            }
 
 
 
@@ -213,7 +229,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-user"></i></div>
                         <div class="name"><strong class="text-uppercase">车牌号</strong><span>number plate</span>
-                            <div class="name"><strong class="text-uppercase"id="PlateNumber"> </strong></div>
+                            <div class="name"><strong class="text-uppercase"id="PlateNumber">A12345</strong></div>
                         </div>
                     </div>
                 </div>
@@ -222,7 +238,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-padnote"></i></div>
                         <div class="name"><strong class="text-uppercase">车架号</strong><span>Frame number</span>
-                            <div class="name"><strong class="text-uppercase"id="FrameNumber"></strong>
+                            <div class="name"><strong class="text-uppercase"id="FrameNumber">Z12345</strong>
                             </div>
                         </div>
                     </div>
@@ -232,7 +248,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-check"></i></div>
                         <div class="name"><strong class="text-uppercase">TBOX在线</strong><span>TBOX ONLINE</span>
-                            <div class="name"><strong class="text-uppercase">OFF</strong></div>
+                            <div class="name"><strong class="text-uppercase">ON</strong></div>
                         </div>
                     </div>
                 </div>
@@ -241,7 +257,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-bill"></i></div>
                         <div class="name"><strong class="text-uppercase">手机在线</strong><span>Mobile Online</span>
-                            <div class="name"><strong class="text-uppercase">OFF</strong></div>
+                            <div class="name"><strong class="text-uppercase">ON</strong></div>
                         </div>
                     </div>
                 </div>
@@ -250,7 +266,7 @@
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-list"></i></div>
                         <div class="name"><strong class="text-uppercase">里程</strong><span>mileage</span>
-                            <div class="name"><strong class="text-uppercase" id="Distance" ></strong></div>
+                            <div class="name"><strong class="text-uppercase" id="Distance" >25</strong>km</div>
                         </div>
                     </div>
                 </div>
@@ -258,8 +274,8 @@
                 <div class="col-xl-2 col-md-4 col-6">
                     <div class="wrapper count-title d-flex">
                         <div class="icon"><i class="icon-list-1"></i></div>
-                        <div class="name"><strong class="text-uppercase">电压</strong><span>Voltage</span>
-                            <div class="name"><strong class="text-uppercase">12.6v</strong></div>
+                        <div class="name"><strong class="text-uppercase" >时速</strong><span>speed</span>
+                            <div class="name"><strong class="text-uppercase" id="Speed">30</strong>km/h</div>
                         </div>
                     </div>
                 </div>
@@ -405,7 +421,7 @@
                                 <div class=" wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">左前胎压</strong>
-                                        <div class="name"><strong class="text-uppercase" id="result0"></strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result0">1</strong>bar</div>
                                     </div>
                                 </div>
                             </li>
@@ -413,7 +429,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">右前胎压</strong>
-                                        <div class="name"><strong class="text-uppercase" id="result1"></strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result1">1</strong>bar</div>
                                     </div>
                                 </div>
                             </li>
@@ -421,7 +437,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">左后胎压</strong>
-                                        <div class="name"><strong class="text-uppercase" id="result2"></strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result2">1</strong>bar</div>
                                     </div>
                                 </div>
                             </li>
@@ -429,7 +445,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">右后胎压</strong>
-                                        <div class="name"><strong class="text-uppercase" id="result3"></strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="result3">1</strong>bar</div>
                                     </div>
                                 </div>
                             </li>
@@ -437,7 +453,7 @@
                                 <div class="wrapper count-title d-flex">
                                     <div class="icon"><i class="icon-padnote"></i></div>
                                     <div class="name"><strong class="text-uppercase">剩余油量</strong>
-                                        <div class="name"><strong class="text-uppercase" id="OilVolume"></strong></div>
+                                        <div class="name"><strong class="text-uppercase" id="OilVolume">15</strong>L</div>
                                     </div>
                                 </div>
                             </li>
@@ -489,7 +505,7 @@
                     <!-- Income-->
                     <div class="card income text-center">
                         <div class="icon"><i class="icon-line-chart"></i></div>
-                        <div class="number">8,577</div>
+                        <div class="number">8,577km</div>
                         <strong class="text-primary">总计里程数</strong>
                     </div>
                 </div>
@@ -511,7 +527,7 @@
                     <!-- User Actibity-->
                     <div class="card user-activity">
                         <h2 class="display h4">保养记录</h2>
-                        <div class="number">2020-06-22</div>
+                        <div class="number" id="LastMaintanceTime">2020-06-22</div>
                         <h3 class="h4 display">最近一次保养时间</h3>
                         <div class="progress">
                             <div role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
